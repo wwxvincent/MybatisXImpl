@@ -2,6 +2,9 @@ package com.vincent.mybatixtest.service;
 
 import com.vincent.mybatixtest.entity.Address;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.vincent.mybatixtest.entity.vo.AddressVO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IAddressService extends IService<Address> {
 
+    List<AddressVO> getAllInfoByUserId(String id);
+
+    boolean updateDefaultAddr(int id, String userId) throws Exception;
 }

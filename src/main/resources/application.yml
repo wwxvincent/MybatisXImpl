@@ -11,7 +11,7 @@ logging:
     com.baomidou: debug
     com.baomidou.mybatisplus: debug
     com.baomidou.dynamic: debug
-    com.vincent.com.vincent.mybatixtest.*: debug
+    com.vincent.mybatixtest.*: debug
     org.mybatis: debug
     org.springframework.jdbc.core: debug
 mybatis-plus:

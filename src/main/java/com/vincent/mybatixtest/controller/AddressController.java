@@ -8,7 +8,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -28,7 +31,8 @@ public class AddressController {
 
     @ApiOperation("通过ID获取地址")
     @GetMapping("/getById")
-    public Address selectById(@Param("id") Integer id) {
+    public Address selectById(@RequestParam Integer id) {
+        System.out.println(id);
             return addressService.getById(id);
     }
 
@@ -40,7 +44,20 @@ public class AddressController {
 
     @ApiOperation("通过ID删除地址")
     @PostMapping("/deleteById")
-    public boolean deleteById(@Param("id") Integer id) {
+    public boolean deleteById(@RequestParam Integer id) {
+        System.out.println(id);
         return addressService.removeById(id);
+    }
+
+    @ApiOperation("get All info")
+    @GetMapping("/getAllInfoByUserId")
+    public List<AddressVO> getAllInfoByUserId(@RequestParam String id) {
+        return addressService.getAllInfoByUserId(id);
+    }
+
+    @ApiOperation("change default addr")
+    @PostMapping("/updateDefaultAddr")
+    public boolean updateDefaultAddr(@RequestParam int id, @RequestParam String userId) throws Exception {
+        return addressService.updateDefaultAddr(id, userId);
     }
 }

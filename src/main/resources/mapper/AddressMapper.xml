@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.vincent.mybatixtest.mapper.AddressMapper">
 
+
+    <select id="getAllInfoByUserId" resultType="com.vincent.mybatixtest.entity.vo.AddressVO"
+            parameterType="java.lang.String">
+        select addr.id, usr.user_name ,usr.user_id, addr.is_default, addr.country, addr.state ,addr.city ,addr.mobile
+        from address addr
+                 left join  user usr
+                            on addr.user_id = usr.user_id
+        where usr.user_id = #{id}
+    </select>
 </mapper>
