@@ -1,6 +1,7 @@
 package com.vincent.mybatixtest.mapper;
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,6 +20,8 @@ public interface UserMapper extends BaseMapper<User> {
     List<User> selectAllByUserId(@Param("userId") String userId);
 
     int insertAll(User user);
+
+    void updateBalanceByIds(@Param("ew") QueryWrapper<User> wrapper, @Param("amount") int amount);
 }
 
 

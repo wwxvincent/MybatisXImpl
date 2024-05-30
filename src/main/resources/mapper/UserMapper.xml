@@ -13,6 +13,10 @@
     <sql id="Base_Column_List">
         user_id,user_name,password
     </sql>
+    <update id="updateBalanceByIds">
+        UPDATE user
+        SET balance = balance - #{amount} ${ew.customSqlSegment}
+    </update>
     <select id="selectAllByUserId" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

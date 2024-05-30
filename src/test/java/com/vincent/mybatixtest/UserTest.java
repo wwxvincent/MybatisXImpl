@@ -1,5 +1,6 @@
 package com.vincent.mybatixtest;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.vincent.mybatixtest.entity.User;
@@ -37,7 +38,19 @@ public class UserTest {
                 .select("user_id", "user_name", "balance")
                 .like("user_name" , "瓜");
         List<User> users = userMapper.selectList(wrapper);
-        users.forEach(System.out::println);
+    }
+
+    @Test
+    void testLambdaQueryWrapper() {
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<User>()
+                .select(User::getUserId, User::getUserName, User::getBalance)
+                .like(User::getUserName, "瓜")
+                .ge(User::getBalance, 1000);
+        List<User> users = userMapper.selectList(wrapper);
+//        users.forEach(System.out::println);
+        for(User en : users){
+            System.out.println(en);
+        }
     }
 
     @Test
@@ -49,4 +62,18 @@ public class UserTest {
                 .in("user_id", ids);
         userMapper.update(null, wrapper);
     }
+
+    @Test
+    void testCustomSqlUpdate() {
+        //1. 更新条件
+        List<String> ids = new ArrayList<>();
+        ids = Arrays.asList(new String[]{"1", "2"});
+        int amount =200;
+        //2. 定义条件
+        QueryWrapper<User> wrapper = new QueryWrapper<User>().in("user_id", ids);
+        //3. 调用自定义SQL方法
+        userMapper.updateBalanceByIds(wrapper, amount);
+    }
+
+
 }
