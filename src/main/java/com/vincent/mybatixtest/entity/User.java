@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.math.BigDecimal;
+
 import lombok.Data;
 
 /**
@@ -28,6 +30,9 @@ public class User implements Serializable {
      * 
      */
     private String password;
+
+
+    private BigDecimal balance;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -68,6 +73,7 @@ public class User implements Serializable {
         sb.append(", userId=").append(userId);
         sb.append(", userName=").append(userName);
         sb.append(", password=").append(password);
+        sb.append(", balance=").append(balance);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
